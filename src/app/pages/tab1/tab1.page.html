@@ -1,17 +1,55 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="ios" class="ion-no-border">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      News
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header collapse="condense" mode="ios" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">News</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-grid fixed>
+    <ion-row>
+
+      <!-- We iterate over all our news articles -->
+      @for (article of articles; track $index) {
+        <ion-col>
+          <ion-card>
+            <ion-card-subtitle class="ion-margin">
+              <span class="text-primary">{{ $index + 1 }}. </span>
+              <span class="article-source-name">{{ article.source.name }}</span>
+            </ion-card-subtitle>
+
+            <ion-card-title class="ion-padding-horizontal ion-margin-bottom">
+              {{ article.title }}
+            </ion-card-title>
+
+            <!-- If the article has an image -->
+            @if (article.urlToImage) {
+              <!-- Then render it -->
+              <ion-img [src]="article.urlToImage"></ion-img>
+            }
+
+            <!-- If the article has an description -->
+            @if (article.description) {
+              <!-- Then render it -->
+              <ion-card-content>
+                <p>{{ article.description }}</p>
+              </ion-card-content>
+            }
+
+
+
+          </ion-card>
+        </ion-col>
+      }
+
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
