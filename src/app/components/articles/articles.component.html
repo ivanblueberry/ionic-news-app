@@ -1,0 +1,14 @@
+<ion-grid fixed>
+  <ion-row>
+
+    <!-- We iterate over all our news articles -->
+    @for (article of articles; track $index) {
+      <ion-col size="12" sizeLg="3" sizeMd="4" sizeSm="6" sizeXs="12">
+        <app-article [article]="article"
+                     [index]="$index + 1"
+        ></app-article>
+      </ion-col>
+    }
+
+  </ion-row>
+</ion-grid>
