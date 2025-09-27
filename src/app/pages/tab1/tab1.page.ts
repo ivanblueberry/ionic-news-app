@@ -9,7 +9,7 @@ import { ArticlesComponent } from "src/app/components/articles/articles.componen
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonCardContent, IonImg, IonCardTitle, IonCardSubtitle, IonCard, IonRow, IonCol, IonGrid, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, ArticlesComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ArticlesComponent],
 })
 export class Tab1Page implements OnInit {
 

@@ -7,7 +7,7 @@ import { ArticleComponent } from "../article/article.component";
   selector: 'app-articles',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
-  imports: [IonGrid, IonCol, IonCardSubtitle, IonCardTitle, IonImg, IonCardContent, IonRow, IonCard, ArticleComponent],
+  imports: [IonGrid, IonCol, IonRow, ArticleComponent],
 })
 export class ArticlesComponent {
 
