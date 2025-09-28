@@ -3,6 +3,8 @@ import { ActionSheetController, IonCard, IonCardSubtitle, IonCardTitle, IonImg, 
 import { Article } from 'src/app/interfaces';
 
 import { Browser } from '@capacitor/browser';
+import { Share } from '@capacitor/share';
+
 
 
 @Component({
@@ -49,8 +51,16 @@ export class ArticleComponent {
     await actionSheetController.present();
   }
 
-  onShareArticle() {
-    console.log('share article')
+  async onShareArticle() {
+    if (!this.article) return;
+    
+    const { title, url } = this.article;
+    
+    await Share.share({
+      title: title || 'Article',
+      url: url || '',
+      dialogTitle: 'Share this article'
+    });
   }
 
   onToggleFavorite() {
