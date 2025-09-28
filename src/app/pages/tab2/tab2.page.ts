@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonSegment, IonSegmentButton, IonLabel } from '@ionic/angular/standalone';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonSegment, IonSegmentButton, IonLabel, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular/standalone';
 import { Article } from 'src/app/interfaces';
 import { News } from 'src/app/services/news';
 import { ArticlesComponent } from "src/app/components/articles/articles.component";
@@ -8,7 +8,7 @@ import { ArticlesComponent } from "src/app/components/articles/articles.componen
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonLabel,
+  imports: [IonInfiniteScrollContent, IonInfiniteScroll, IonLabel,
     IonSegmentButton,
     IonSegment,
     IonHeader,
@@ -17,6 +17,8 @@ import { ArticlesComponent } from "src/app/components/articles/articles.componen
     IonContent, ArticlesComponent]
 })
 export class Tab2Page implements OnInit {
+
+  @ViewChild( IonInfiniteScroll, { static: true } ) infiniteScroll?: IonInfiniteScroll;
 
   public categories: string[] = ['business',
                                  'entertainment',
@@ -41,11 +43,24 @@ export class Tab2Page implements OnInit {
       })
   }
 
-  segmentChanged( event: any ) {
-    this.selectedCategory = event.detail.value;
+  segmentChanged( event: Event ) {
+    this.selectedCategory = (event as CustomEvent).detail.value;
     this.newsService.getTopHeadlinesByCategory(this.selectedCategory)
       .subscribe( articles => {
         this.articles = [ ...articles ]
+      })
+  }
+
+  loadData() {
+    this.newsService.getTopHeadlinesByCategory( this.selectedCategory, true )
+      .subscribe( articles => {
+        if ( articles.length === this.articles.length ){
+          this.infiniteScroll!.disabled = true;
+          return;
+        }
+
+        this.articles = articles;
+        this.infiniteScroll?.complete();
       })
   }
 
