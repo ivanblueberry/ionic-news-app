@@ -10,7 +10,8 @@ import { provideHttpClient } from '@angular/common/http';
 
 // Iconography Setup
 import { addIcons } from 'ionicons';
-import { globeOutline,
+import { ellipsisVertical,
+         globeOutline,
          personOutline,
          starOutline,
        } from 'ionicons/icons'
@@ -18,7 +19,8 @@ import { globeOutline,
 addIcons({
   'person-outline': personOutline,
   'globe-outline' : globeOutline,
-  'star-outline'  : starOutline
+  'star-outline'  : starOutline,
+  'ellipsis-vertical': ellipsisVertical,
 })
 
 bootstrapApplication(AppComponent, {
