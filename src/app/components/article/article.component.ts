@@ -5,7 +5,7 @@ import { Article } from 'src/app/interfaces';
 import { Browser } from '@capacitor/browser';
 import { Share } from '@capacitor/share';
 
-
+import { StorageService } from 'src/app/services/storage';
 
 @Component({
   selector: 'app-article',
@@ -19,7 +19,9 @@ export class ArticleComponent {
   @Input() index?: number;
 
 
-  constructor( private actionSheetController: ActionSheetController) { }
+  constructor( private actionSheetController: ActionSheetController,
+               private storageService: StorageService
+              ) { }
 
 
   openArticle = async () => {
@@ -27,6 +29,11 @@ export class ArticleComponent {
   };
 
   async onOpenMenu() {
+
+    const articleInFavorites = this.storageService.getLocalArticles.find(
+      art => art.title === this.article?.title
+    );
+
     const actionSheetController = await this.actionSheetController.create({
       header: 'Options',
       buttons: [
@@ -36,8 +43,8 @@ export class ArticleComponent {
           handler: () => this.onShareArticle()
         },
         {
-          text: 'Favorites',
-          icon: 'heart-outline',
+          text: articleInFavorites ? 'Remove Favorite' : 'Favorite',
+          icon: articleInFavorites ? 'heart' : 'heart-outline',
           handler: () => this.onToggleFavorite()
         },
         {
@@ -53,9 +60,9 @@ export class ArticleComponent {
 
   async onShareArticle() {
     if (!this.article) return;
-    
+
     const { title, url } = this.article;
-    
+
     await Share.share({
       title: title || 'Article',
       url: url || '',
@@ -64,6 +71,9 @@ export class ArticleComponent {
   }
 
   onToggleFavorite() {
-    console.log('toggle')
+    if(this.article) {
+      this.storageService.saveRemoveArticle(this.article);
+      console.log('Toggled favorite status');
+    }
   }
 }
