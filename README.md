@@ -1,5 +1,37 @@
 # News App Ionic
 
+<!-- Demo Section -->
+## 📱 Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="./assets/screenshots/for-you.png" alt="For You" width="200" />
+        <br />
+        <em>For You</em>
+      </td>
+      <td align="center">
+        <img src="./assets/screenshots/headers.png" alt="Headers" width="200" />
+        <br />
+        <em>Headers</em>
+      </td>
+      <td align="center">
+        <img src="./assets/screenshots/favorites.png" alt="Favorites" width="200" />
+        <br />
+        <em>Favorites</em>
+      </td>
+      <td align="center">
+        <img src="./assets/screenshots/action-sheet.png" alt="Action Sheet" width="200" />
+        <br />
+        <em>Article Options</em>
+      </td>
+    </tr>
+  </table>
+</div>
+
+---
+
 A modern news application built with Ionic 8 and Angular 20, featuring the latest standalone components and Angular control flow syntax. This project demonstrates best practices for mobile app development with cross-platform capabilities.
 
 ## 📱 About
